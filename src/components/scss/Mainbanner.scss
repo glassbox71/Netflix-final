@@ -1,0 +1,360 @@
+/* src/components/scss/Mainbanner.scss */
+@use "../../App.scss" as Color;
+
+.wrap {
+  position: relative;
+  max-width: 1440px;
+  height: 700px;
+  margin: 0 auto;
+  background-color: Color.$BG;
+
+  .banner-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+
+    &.no-transition {
+      transition: none;
+    }
+
+    .banner-item {
+      position: relative;
+      flex: 0 0 100%;
+      height: 100%;
+
+      .banner-layer {
+        width: 100%;
+        height: 100%;
+
+        .banBg {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          z-index: 10;
+        }
+
+        .banMid {
+          position: absolute;
+          left: 26%;
+          bottom: 0;
+          height: 110%;
+          aspect-ratio: 638/777;
+          z-index: 20;
+        }
+      }
+
+      .btns-text {
+        position: absolute;
+        inset: 0;
+        z-index: 30;
+
+        .banTxt {
+          position: absolute;
+          bottom: 13%;
+          left: 0;
+        }
+
+        /* ✅ 버튼들 묶음(새로 만든 .btns 기준) */
+        .btns {
+          position: absolute;
+          left: 5.5%;
+          bottom: 10%;
+          display: flex;
+          align-items: center;
+          gap: 1.2rem; /* ✅ 버튼 사이 간격 */
+          z-index: 31;
+        }
+
+        /* ✅ 공통 버튼 스타일 (기존 absolute/left 전부 제거) */
+        .btns > button {
+          position: static;
+          bottom: auto;
+          left: auto;
+
+          width: 24rem;
+          height: 4rem;
+          border-radius: 0.4rem;
+          border: none;
+          cursor: pointer;
+
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.8rem;
+        }
+
+        /* ✅ PLAY */
+        .play {
+          background: #fff;
+          color: #111;
+
+          &:hover {
+            border: 1px solid #e50914;
+            color: #e50914;
+          }
+
+          .play-ico {
+            position: relative;
+            width: 2rem;
+            height: 2rem;
+            flex: 0 0 2rem;
+
+            img {
+              position: absolute;
+              inset: 0;
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+              object-position: center;
+              transition: opacity 0.15s ease;
+              pointer-events: none;
+            }
+
+            .playicon {
+              opacity: 1;
+            }
+            .play-hover {
+              opacity: 0;
+            }
+          }
+
+          &:hover {
+            .play-ico {
+              .playicon {
+                opacity: 0;
+              }
+              .play-hover {
+                opacity: 1;
+              }
+            }
+          }
+        }
+
+        /* ✅ WISH */
+        .wish {
+          background: rgba(255, 255, 255, 0.6);
+          color: #111;
+
+          .wish-ico {
+            position: relative;
+            width: 2rem;
+            height: 2rem;
+            flex: 0 0 2rem;
+
+            img {
+              position: absolute;
+              inset: 0;
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+              object-position: center;
+              transition: opacity 0.15s ease;
+              pointer-events: none;
+            }
+
+            .wishicon {
+              opacity: 1;
+            }
+            .wish-hover {
+              opacity: 0;
+            }
+          }
+
+          &:hover {
+            .wish-ico {
+              .wishicon {
+                opacity: 0;
+              }
+              .wish-hover {
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    /* 개별 배너 위치 조정(네 기존 유지) */
+    .banner-item:first-child .banMid {
+      left: 46%;
+      aspect-ratio: 638/777;
+    }
+    .banner-item:nth-child(2) .banMid {
+      left: 46%;
+      aspect-ratio: 638/777;
+    }
+    .banner-item:nth-child(3) .banMid {
+      left: 23%;
+      width: 70%;
+      aspect-ratio: 37/30;
+    }
+    .banner-item:nth-child(4) .banMid {
+      left: 16%;
+      width: 70%;
+      aspect-ratio: 351/254;
+    }
+    .banner-item:last-child .banMid {
+      left: 46%;
+      aspect-ratio: 638/777;
+    }
+  }
+
+  .banner-dots {
+    position: absolute;
+    left: 50%;
+    bottom: 2.4rem;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.8rem;
+    z-index: 40;
+
+    .dot {
+      width: 0.8rem;
+      height: 0.8rem;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.4);
+      opacity: 0.9;
+      transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+
+      &.active {
+        background-color: Color.$main1;
+        opacity: 1;
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  .mobile-wrap {
+    display: none;
+  }
+
+  /* ✅ 1440 이하 */
+  @media (max-width: 1440px) {
+    max-width: 100%;
+    height: 600px;
+
+    .banner-track {
+      margin-top: 7rem;
+
+      .banner-item {
+        .banner-layer {
+          .banMid {
+            height: auto;
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+          }
+        }
+
+        .btns-text {
+          .banTxt {
+            transform: scale(0.85);
+            transform-origin: left bottom;
+            bottom: 15%;
+            max-width: 70%;
+          }
+
+          /* ✅ 버튼 크기만 줄이고, 위치는 .btns가 담당 */
+          .btns > button {
+            width: 18rem;
+            height: 3.4rem;
+          }
+        }
+      }
+    }
+
+    .banner-dots {
+      bottom: 2rem;
+    }
+  }
+
+  /* ✅ 모바일(430.98 이하) */
+  @media (max-width: 430.98px) {
+    max-width: 100%;
+    height: 150vw;
+    overflow: hidden;
+    position: relative;
+
+    .mobile-wrap {
+      position: relative;
+      height: 100%;
+      margin-top: 0;
+      display: block;
+
+      .mobileBG {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+      }
+
+      .mobileimg {
+        position: absolute;
+        left: 4.1%;
+        top: 4.4rem;
+        width: 91.8%;
+        aspect-ratio: 179/248;
+        margin: 0;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          display: block;
+        }
+      }
+
+      .mobilebtn {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 12%;
+        z-index: 60;
+
+        button {
+          position: absolute;
+          width: 38%;
+          height: 3.6rem;
+          left: 24%;
+          bottom: 0;
+          border: none;
+          border-radius: 0.4rem;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.6rem;
+          cursor: pointer;
+          text-decoration: none;
+        }
+
+        button:last-child {
+          width: 4rem;
+          height: 3.6rem;
+          left: 66%;
+          background: rgba(255, 255, 255, 0.6);
+        }
+      }
+    }
+
+    .banner-dots {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 4%;
+      z-index: 70;
+    }
+
+    .banner-track {
+      display: none;
+    }
+  }
+}

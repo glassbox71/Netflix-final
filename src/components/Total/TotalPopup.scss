@@ -1,0 +1,191 @@
+@use "../../App.scss" as color;
+
+/* =========================
+   필터 버튼 래퍼 (TSX: total-wrap)
+   ========================= */
+.total-wrap {
+  // position: absolute;
+  width: 24rem;
+  height: 4rem;
+  margin-left: auto;
+  margin-top: 2rem;
+
+  > button {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background-color: color.$grey3;
+    border: none;
+    border-radius: 0.4rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    cursor: pointer;
+
+    img {
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+  }
+}
+
+/* =========================
+   DIM + BLUR (TSX: total-dim)
+   ========================= */
+.total-dim {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.35);
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  will-change: backdrop-filter;
+}
+
+/* =========================
+   팝업 박스 (TSX: total-popup)
+   ========================= */
+.total-popup {
+  width: min(110rem, 92vw);
+  max-height: 80vh;
+  overflow: auto;
+
+  background: rgba(18, 18, 18, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.2rem;
+  padding: 2.4rem 2.8rem;
+  color: #fff;
+}
+
+/* =========================
+   헤더 (TSX: popup-top / popup-title / popup-close)
+   - 타이틀은 진짜 가운데, X는 오른쪽
+   ========================= */
+.popup-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* X를 오른쪽 끝으로 */
+  margin-bottom: 2.2rem;
+}
+
+.popup-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+  pointer-events: none; /* 타이틀 위 클릭이 X를 방해하지 않게 */
+}
+
+.popup-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* =========================
+   섹션 (TSX: total-sec / total-sec-title)
+   ========================= */
+.total-sec {
+  margin-top: 2.2rem;
+}
+
+.total-sec-title {
+  font-size: 1.6rem;
+  opacity: 0.85;
+  margin-bottom: 1.2rem;
+  text-align: start;
+}
+
+/* =========================
+   라디오 (TSX: radio-row / radio-item)
+   ========================= */
+.radio-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.6rem;
+
+  input {
+    accent-color: color.$main1;
+  }
+}
+
+/* =========================
+   칩 (TSX: chip-grid / chip-row / chip)
+   ========================= */
+.chip-grid,
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.chip {
+  padding: 0.7rem 1.2rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: transparent;
+  color: #fff;
+  font-size: 1.6rem;
+  cursor: pointer;
+  opacity: 0.9;
+
+  &.is-active {
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.12);
+    opacity: 1;
+  }
+}
+
+/* =========================
+   하단 버튼 (TSX: total-actions)
+   ========================= */
+.total-actions {
+  margin-top: 3rem;
+  display: flex;
+  gap: 1.2rem;
+
+  .btn {
+    flex: 1;
+    height: 4.4rem;
+    border-radius: 0.4rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1.3rem;
+  }
+
+  .btn.ghost {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .btn.primary {
+    background: #e50914;
+    color: #fff;
+  }
+}

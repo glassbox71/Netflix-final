@@ -1,0 +1,97 @@
+/* src/components/scss/ChoiceContentBG.scss */
+
+.choice-rolling {
+  --gapX: 1.2rem;
+  --gapY: 1rem;
+
+  position: relative;
+  display: flex;
+  gap: var(--gapX);
+
+  width: 100%;
+  max-width: 144rem;
+  margin: 0 auto;
+
+  /* ✅ PC 기본 높이 */
+  height: 60rem;
+  overflow: hidden;
+  align-items: stretch;
+
+  .v-column {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .v-column-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gapY);
+    will-change: transform;
+  }
+
+  .v-card {
+    flex: 0 0 auto;
+
+    > img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 11 / 16;
+      object-fit: cover;
+      border-radius: 0.8rem;
+      filter: brightness(0.9);
+    }
+  }
+}
+
+/* ✅ 무한 롤링 */
+@keyframes v-scroll-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+@keyframes v-scroll-down {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* 4줄 방향/속도 */
+.choice-rolling .col-0 {
+  animation: v-scroll-up 45s linear infinite;
+}
+.choice-rolling .col-1 {
+  animation: v-scroll-down 48s linear infinite;
+}
+.choice-rolling .col-2 {
+  animation: v-scroll-up 40s linear infinite;
+}
+.choice-rolling .col-3 {
+  animation: v-scroll-down 43s linear infinite;
+}
+
+/* =========================
+   태블릿: 양쪽 1.6rem, 줄어들면 같이 줄어듦
+   ========================= */
+@media (max-width: 1440px) {
+  .choice-rolling {
+    width: calc(100% - 3.2rem);
+    margin: 0 1.6rem;
+
+    /* 화면 작아지면 높이도 같이 내려가게 */
+    height: 100%;
+    padding-bottom: 12rem;
+  }
+}
+
+/* =========================
+   ✅ 모바일: 기존 BG 아예 숨김
+   ========================= */
