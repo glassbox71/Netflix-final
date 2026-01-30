@@ -25,30 +25,30 @@ import {
 import { useProfileStore } from "./Profile";
 
 /** Kakao SDK 타입 */
-interface KakaoSDK {
-  isInitialized(): boolean;
-  init(appKey: string): void;
-  Auth: {
-    login(options: {
-      scope: string;
-      success: (authObj: unknown) => void;
-      fail: (err: unknown) => void;
-    }): void;
-  };
-  API: {
-    request(options: { url: string }): Promise<{
-      id: number;
-      kakao_account?: {
-        email?: string;
-        phone_number?: string;
-        profile?: {
-          nickname?: string;
-          profile_image_url?: string;
-        };
-      };
-    }>;
-  };
-}
+// interface KakaoSDK {
+//   isInitialized(): boolean;
+//   init(appKey: string): void;
+//   Auth: {
+//     login(options: {
+//       scope: string;
+//       success: (authObj: unknown) => void;
+//       fail: (err: unknown) => void;
+//     }): void;
+//   };
+//   API: {
+//     request(options: { url: string }): Promise<{
+//       id: number;
+//       kakao_account?: {
+//         email?: string;
+//         phone_number?: string;
+//         profile?: {
+//           nickname?: string;
+//           profile_image_url?: string;
+//         };
+//       };
+//     }>;
+//   };
+// }
 
 export interface MembershipInfo {
   type: "adStandard" | "standard" | "premium";
@@ -461,8 +461,8 @@ export const useAuthStore = create<AuthState>()(
               : serverTimestamp(),
             ...(userDoc.exists() &&
               userDoc.data().membership && {
-                membership: userDoc.data().membership,
-              }),
+              membership: userDoc.data().membership,
+            }),
           };
 
           await setDoc(userRef, kakaoUser, { merge: true });
@@ -513,9 +513,9 @@ export const useAuthStore = create<AuthState>()(
         set((state) => ({
           user: state.user
             ? (() => {
-                const { membership, ...rest } = state.user;
-                return rest;
-              })()
+              const { membership, ...rest } = state.user;
+              return rest;
+            })()
             : state.user,
           onboardingDone: false,
         }));
